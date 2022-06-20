@@ -1,0 +1,56 @@
+.header {
+    overflow: hidden;
+    background-color: aliceblue;
+}
+
+.header p {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 15px;
+    border-radius: 4px;
+}
+
+.header p.logo{
+font-size: 25px;
+font-weight: bold;
+color: cornflowerblue;
+}
+
+.header p:hover{
+    background-color: rgb(175, 190, 190);
+    color: rgb(255, 255, 255);
+}
+
+.header p.active {
+    background-color: rgb(61, 124, 240);
+    color: antiquewhite;
+}
+
+.header-right{
+    float: right;
+}
+@media screen and (max-width:500px){
+.header p{
+    float: none;
+    display: block;
+    text-align: left;
+}
+
+.header-right{
+float: none;
+
+}
+ }
+
+ .inputField{
+    width: 40% !important;
+    padding: 1px;
+    margin-top:5px ;
+    margin-right: 6px;
+    border: none;
+    font-size: 17px;
+ }
