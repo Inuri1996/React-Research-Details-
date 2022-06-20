@@ -12,6 +12,7 @@ import View from "./pages/View";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from "./components/Header";
+import Search from "./pages/Search";
 
 function App () {
   return (
@@ -23,10 +24,12 @@ function App () {
       <ToastContainer position="top-center"/>
         <Switch>
             <Route exact path="/Home" component={Home} />
-            <Route  path="/add" component={AddEdit} />
-            <Route  path="/update/:id" component={AddEdit} />
-            <Route  path="/view/:id" component={View} />
-            <Route  path="/about" component={About} />
+            <Route path="/add" component={AddEdit} />
+            <Route path="/update/:id" component={AddEdit} />
+            <Route path="/view/:id" component={View} />
+            <Route path="/about" component={About} />
+            <Route path="/search" component={Search} />
+
         </Switch>
     </div>
 </BrowserRouter>
