@@ -10,7 +10,7 @@ const Header = () => {
     const history = useHistory();
 
     useEffect(() => {
-        if(location.pathname === "/home") {
+        if(location.pathname === "/Home") {
             setActiveTab("home");
         } else if (location.pathname === "/add") {
             setActiveTab("AddContact");

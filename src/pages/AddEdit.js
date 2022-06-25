@@ -17,7 +17,8 @@ const initialState ={
     title: "",
     supervisor: "",
     contact: "",
-}
+    
+};
 
 const AddEdit = () => {
     const [state, setState] = useState(initialState);
@@ -60,7 +61,7 @@ useEffect(() => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(!name || !index || !email || !title || !supervisor || !contact){
+        if(!name || !index || !email || !title || !supervisor || !contact ){
             toast.error("please provide value in each input field");
         }else{
             if(!id){
@@ -161,6 +162,8 @@ useEffect(() => {
                 value={contact || ""} 
                 onChange={handleInputChange}
                 />
+
+                
 
                 <input type ="submit" value={id ? "update" : "save" }/>
 

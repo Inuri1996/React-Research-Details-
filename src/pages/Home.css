@@ -51,3 +51,23 @@
     background-color: bisque;
     color: black;
 }
+
+.dropdown{
+    width: 20%;
+    margin: 5px;
+}
+
+.btn-reset{
+    background-color: #9fa4f5;
+    color: black;
+}
+
+.btn-active{
+    background-color: #9fa4f5;
+    color: black;
+}
+
+.btn-inactive{
+    background-color: #445f61;
+    color: black;
+}

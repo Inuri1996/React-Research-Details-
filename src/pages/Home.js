@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 const Home = () => {
 
  const [data, setData] = useState({});
+ const [sortedData, setSortedData] =useState([])
+ const [sort, setsort] = useState(false);
  
  useEffect(() => {
              fireDb.child("research-details").on("value", (snapshot) => {
@@ -38,6 +40,27 @@ const Home = () => {
             }
         };
 
+const handleChange = (e) => {
+    setsort(true);
+    fireDb.child("research-details")
+    .orderByChild(`${e.target.value}`)
+    .on("value", (snapshot) => {
+        let sortedData =[];
+        snapshot.forEach((snap) => {
+            sortedData.push(snap.val());
+        });
+        setSortedData(sortedData);
+        });
+    
+};
+
+const handleReset = () => {
+setsort(false);
+};
+
+
+
+
     return (
         <div style={{ marginTop:"100px" }}>
             <table className="styled-table">
@@ -50,38 +73,77 @@ const Home = () => {
                        <th style={{ textAlign:"center" }}>Research Title</th> 
                        <th style={{ textAlign:"center" }}>Supervisor</th> 
                        <th style={{ textAlign:"center" }}>Contact</th> 
-                       <th style={{ textAlign:"center" }}>Action</th> 
+                       
+                       {!sort && <th style={{ textAlign:"center" }}>Action</th> }
                     </tr>
                 </thead>
-                <tbody>
-                    {Object.keys(data).map((id, index) => {
-                        return(
-                            <tr key={id}>
-                                <th scope="row">{index + 1}</th>
-                                <td>{data[id].name}</td>
-                                <td>{data[id].index}</td>
-                                <td>{data[id].email}</td>
-                                <td>{data[id].title}</td>
-                                <td>{data[id].supervisor}</td>
-                                <td>{data[id].contact}</td>
-                                <td>
-                                    <Link to={`./update/${id}`}>
-                                    <button className='btn btn-edit'>Edit</button>
-                                    </Link>
-                                    <button className='btn btn-delete' 
-                                    onClick={() => onDelete(id)}>Delete</button>
-                                    <Link to={`./view/${id}`}>
-                                    <button className='btn btn-view'>View</button>
-                                    </Link>
-                                </td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
 
+{!sort && (
 
-            </table> 
-           
+<tbody>
+{Object.keys(data).map((id, index) => {
+    return(
+        <tr key={id}>
+            <th scope="row">{index + 1}</th>
+            <td>{data[id].name}</td>
+            <td>{data[id].index}</td>
+            <td>{data[id].email}</td>
+            <td>{data[id].title}</td>
+            <td>{data[id].supervisor}</td>
+            <td>{data[id].contact}</td>
+            
+            <td>
+                <Link to={`./update/${id}`}>
+                <button className='btn btn-edit'>Edit</button>
+                </Link>
+                <button className='btn btn-delete' 
+                onClick={() => onDelete(id)}>Delete</button>
+                <Link to={`./view/${id}`}>
+                <button className='btn btn-view'>View</button>
+                </Link>
+            </td>
+        </tr>
+    )
+})}
+</tbody>
+ )}
+
+ {sort && (
+    <tbody>
+        {sortedData.map((item, index) => {
+            return(
+                <tr key={index}>
+                <th scope="row">{index + 1}</th>
+                <td>{item.name}</td>
+                <td>{item.index}</td>
+                <td>{item.email}</td>
+                <td>{item.title}</td>
+                <td>{item.supervisor}</td>
+                <td>{item.contact}</td>
+                </tr>
+            );
+        })}
+    </tbody>
+ )}
+              
+ </table> 
+           <label> Sort By:</label>
+           <select className='dropdown' name='colvalue' onChange={handleChange}>
+                <option>please select</option>
+                <option value="name">Student Name</option>
+                <option value="index">IndexNO</option>
+                <option value="email">Email</option>
+                <option value="title">Research Title</option>
+                <option value="supervisor">Supervisor</option>
+                <option value="contact">Contact</option>
+                
+           </select>
+           <button className='btn btn-reset' onClick={handleReset}>
+            Reset
+            </button>
+            <br/>
+            
+            
                 
         </div>
     );
